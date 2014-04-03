@@ -1,0 +1,16 @@
+body {
+    font-family: Consolas, Lucida Console, monospace;
+}
+label {
+    width: 10em;
+    display: inline-block;
+}
+#commonfactors {
+    width: 40em;
+}
+#showme {
+    background: blue;
+    border: 1px solid green;
+    color: aqua;
+    margin: 0 auto;
+}
