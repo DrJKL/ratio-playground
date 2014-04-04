@@ -1,15 +1,21 @@
 body {
     font-family: Consolas, Lucida Console, monospace;
 }
+#inputs {
+    position:absolute;
+    top:.3em;
+    left:.3em;
+}
+#inputs label {
+    width: 4em;
+}
+
 label {
     width: 10em;
     display: inline-block;
 }
-#commonfactors {
-    width: 40em;
-}
 #showme {
-    background: blue;
+    background-color: blue;
     border: 1px solid green;
     color: aqua;
     margin: 0 auto;

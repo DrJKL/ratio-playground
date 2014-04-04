@@ -45,14 +45,26 @@ function recalculate() {
     var height = document.querySelector('#height').value;
     var gcd_ = gcd(width, height);
     var factors_ = factors(gcd_);
-    
+    var widthRatio = width / gcd_;
+    var heightRatio = height / gcd_;
+    var numfactors = factors_.length;
+
     document.querySelector('#gcd').innerHTML = gcd_;
     document.querySelector('#commonfactors').innerHTML = factors_;
-    document.querySelector('#numfactors').innerHTML = factors_.length;
-    document.querySelector('#ratio').innerHTML = "" + (width / gcd_) + " : " + (height / gcd_);
-    
+    document.querySelector('#numfactors').innerHTML = numfactors;
+    document.querySelector('#ratio').innerHTML = "" + widthRatio + " : " + heightRatio;
+
     var showme = document.querySelector('#showme');
     showme.style.width = width + "px";
     showme.style.height = height + "px";
-    showme.style['background-color'] = factors_.length == 12 ? "gold" : "blue";
+    showme.style['background-color'] = goodRatio(widthRatio, heightRatio, gcd_, factors_.length) ? "gold" : "blue";
+}
+
+function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
+    var good = true;
+    good = good && widthRatio <= 20;
+    good = good && heightRatio <= 20;
+    good = good && numfactors >= 6;
+    good = good && gcd >= 10;
+    return good;
 }
