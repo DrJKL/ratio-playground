@@ -49,15 +49,20 @@ function recalculate() {
     var heightRatio = height / gcd_;
     var numfactors = factors_.length;
 
+
     document.querySelector('#gcd').innerHTML = gcd_;
     document.querySelector('#commonfactors').innerHTML = makeFactorsList(factors_);
-    document.querySelector('#numfactors').innerHTML = numfactors;
+    document.querySelector("#factorslabel").innerHTML = "factors (" + numfactors + ") ";
     document.querySelector('#ratio').innerHTML = "" + widthRatio + " : " + heightRatio;
 
-    var showme = document.querySelector('#showme');
-    showme.style.width = width + "px";
-    showme.style.height = height + "px";
-    showme.style['background-color'] = goodRatio(widthRatio, heightRatio, gcd_, factors_.length) ? "gold" : "blue";
+    var grid = document.querySelector("#showme.grid");
+    grid.width = width;
+    grid.height =  height;
+
+    grid.classList.remove("good");
+    if (goodRatio(widthRatio, heightRatio, gcd_, numfactors)) {
+        grid.classList.add("good");
+    }
 }
 
 function makeFactorsList(factors_) {
@@ -65,7 +70,7 @@ function makeFactorsList(factors_) {
     for (var i = 0, len = factors_.length; i < len; i++) {
         factorsList += "<span onclick='createGrid(" + factors_[i] + ")'>" + factors_[i] + "</span>, ";
     };
-    return factorsList;
+    return factorsList.substring(0,factorsList.length - 2);
 }
 
 function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
@@ -78,16 +83,21 @@ function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
 }
 
 function createGrid(size) {
-    var parent = document.querySelector('#showme .grid');
-    parent.innerHTML = '';
-    var ratioW = parseInt(parent.parentElement.style.width) / size;
-    var ratioH = parseInt(parent.parentElement.style.height) / size;
+    var grid = document.querySelector('#showme.grid');
+    var ctx = grid.getContext("2d");
+    ctx.clearRect(0, 0, grid.width, grid.height);
+    var ratioW = grid.width / size;
+    var ratioH = grid.height / size;
+    ctx.beginPath();
     for (var i = 0; i < ratioH; i++) {
-        for (var p = 0; p < ratioW; p++) {
-            var cell = document.createElement('div');
-            cell.style.height = (size - 1) + 'px';
-            cell.style.width = (size - 1) + 'px';
-            parent.appendChild(cell);
-        }
+        ctx.moveTo(0,i*size);
+        ctx.lineTo(grid.width, i*size);
     }
+    for (var i = 0; i < ratioW; i++) {
+        ctx.moveTo(i*size, 0);
+        ctx.lineTo(i*size, grid.height);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = "black";
+    ctx.stroke();
 }

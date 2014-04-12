@@ -15,25 +15,14 @@ label {
     margin: 0 auto;
     position: relative;;
 }
-#showme .grid {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-#showme .ratioinfo {
-    position: absolute;
-    left: 0;
-    top: 0;
+#showme.grid {
+    display:block;
 }
 
-.grid {
-    border: 1px solid #ccc;
-    border-width: 1px 0 0 1px;
+#inputs, #ratioinfo {
+    display:inline-block;
 }
 
-.grid div {
-    border: 1px solid #ccc;
-    border-width: 0 1px 1px 0;
-    float: left;
+#showme.grid.good {
+    background-color: gold;
 }
