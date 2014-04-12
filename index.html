@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>ratio-playground</title>
-<link rel="stylesheet" href="styles/style.css" />
-<script type="text/javascript" src="scripts/script.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ratio-playground</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script type="text/javascript" src="scripts/script.js"></script>
     <!-- GA Script -->
     <script>
     (function(i, s, o, g, r, a, m) {
@@ -24,27 +25,33 @@
     ga('send', 'pageview');
     </script>
 </head>
+
 <body>
     <header>ratio-playground</header>
     <div id="inputs">
-    <label for="width">width:</label>
-    <input type="number" id="width" name="width" value="960" step="10" onchange="recalculate()">
-    <br>
-    <label for="height">height:</label>
-    <input type="number" id="height" name="height" value="540" step="10" onchange="recalculate()">
+        <label for="width">width:</label>
+        <input type="number" id="width" name="width" value="960" step="10" onchange="recalculate()">
+        <br>
+        <label for="height">height:</label>
+        <input type="number" id="height" name="height" value="540" step="10" onchange="recalculate()">
     </div>
     <br>
     <div id="showme">
-    <label for="gcd">gcd</label>
-    <span id="gcd"></span>
-    <br>
-    <label>factors (<span id="numfactors"></span>)</label>
-    <span id="commonfactors" ></span>
-    <br>
-    <label for="ratio">ratio</label>
-    <span id="ratio" >
+        <label for="gcd">gcd</label>
+        <span id="gcd"></span>
+        <br>
+        <label>factors (
+            <span id="numfactors"></span>)</label>
+        <span id="commonfactors"></span>
+        <br>
+        <label for="ratio">ratio</label>
+        <span id="ratio">
     </div>
-    <footer><a href="/">Home</a></footer>
-<script type="text/javascript">recalculate();</script>
+    <footer><a href="/">Home</a>
+    </footer>
+    <script type="text/javascript">
+    recalculate();
+    </script>
 </body>
+
 </html>
