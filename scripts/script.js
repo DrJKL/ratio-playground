@@ -57,7 +57,7 @@ function recalculate() {
 
     var grid = document.querySelector("#showme.grid");
     grid.width = width;
-    grid.height =  height;
+    grid.height = height;
 
     grid.classList.remove("good");
     if (goodRatio(widthRatio, heightRatio, gcd_, numfactors)) {
@@ -70,7 +70,7 @@ function makeFactorsList(factors_) {
     for (var i = 0, len = factors_.length; i < len; i++) {
         factorsList += "<span onclick='createGrid(" + factors_[i] + ")'>" + factors_[i] + "</span>, ";
     };
-    return factorsList.substring(0,factorsList.length - 2);
+    return factorsList.substring(0, factorsList.length - 2);
 }
 
 function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
@@ -83,6 +83,8 @@ function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
 }
 
 function createGrid(size) {
+    size = size || window.gridSize;
+    window.gridSize = size || window.gridSize;
     var grid = document.querySelector('#showme.grid');
     var ctx = grid.getContext("2d");
     ctx.clearRect(0, 0, grid.width, grid.height);
@@ -90,14 +92,34 @@ function createGrid(size) {
     var ratioH = grid.height / size;
     ctx.beginPath();
     for (var i = 0; i < ratioH; i++) {
-        ctx.moveTo(0,i*size);
-        ctx.lineTo(grid.width, i*size);
+        ctx.moveTo(0, i * size);
+        ctx.lineTo(grid.width, i * size);
     }
     for (var i = 0; i < ratioW; i++) {
-        ctx.moveTo(i*size, 0);
-        ctx.lineTo(i*size, grid.height);
+        ctx.moveTo(i * size, 0);
+        ctx.lineTo(i * size, grid.height);
     }
     ctx.closePath();
     ctx.strokeStyle = "black";
     ctx.stroke();
+    ctx.fillStyle = "blue";
+    if (window.animPoint >= 0) {
+        var cursorX = (animPoint * size) % grid.width;
+        var cursorY = Math.floor((animPoint * size) / grid.width) * size;
+        ctx.fillRect(cursorX, cursorY, size, size);
+        window.animPoint++;
+        window.animPoint %= ratioW * ratioH;
+    }
+}
+
+function toggleAnimation() {
+    window.animationInterval = window.animationInterval ?
+        clearInterval(window.animationInterval) :
+        setInterval(update, 100);
+    window.animPoint = window.animationInterval ? 0 : -1;
+    createGrid();
+}
+
+function update() {
+    createGrid();
 }
