@@ -1,15 +1,9 @@
 body {
     font-family: Consolas, Lucida Console, monospace;
 }
-#inputs {
-    position:absolute;
-    top:.3em;
-    left:.3em;
-}
 #inputs label {
     width: 4em;
 }
-
 label {
     width: 10em;
     display: inline-block;
@@ -19,4 +13,27 @@ label {
     border: 1px solid green;
     color: aqua;
     margin: 0 auto;
+    position: relative;;
+}
+#showme .grid {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#showme .ratioinfo {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.grid {
+    border: 1px solid #ccc;
+    border-width: 1px 0 0 1px;
+}
+
+.grid div {
+    border: 1px solid #ccc;
+    border-width: 0 1px 1px 0;
+    float: left;
 }

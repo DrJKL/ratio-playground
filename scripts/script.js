@@ -50,7 +50,7 @@ function recalculate() {
     var numfactors = factors_.length;
 
     document.querySelector('#gcd').innerHTML = gcd_;
-    document.querySelector('#commonfactors').innerHTML = factors_;
+    document.querySelector('#commonfactors').innerHTML = makeFactorsList(factors_);
     document.querySelector('#numfactors').innerHTML = numfactors;
     document.querySelector('#ratio').innerHTML = "" + widthRatio + " : " + heightRatio;
 
@@ -60,6 +60,14 @@ function recalculate() {
     showme.style['background-color'] = goodRatio(widthRatio, heightRatio, gcd_, factors_.length) ? "gold" : "blue";
 }
 
+function makeFactorsList(factors_) {
+    var factorsList = "";
+    for (var i = 0, len = factors_.length; i < len; i++) {
+        factorsList += "<span onclick='createGrid(" + factors_[i] + ")'>" + factors_[i] + "</span>, ";
+    };
+    return factorsList;
+}
+
 function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
     var good = true;
     good = good && widthRatio <= 20;
@@ -67,4 +75,19 @@ function goodRatio(widthRatio, heightRatio, gcd, numfactors) {
     good = good && numfactors >= 6;
     good = good && gcd >= 10;
     return good;
+}
+
+function createGrid(size) {
+    var parent = document.querySelector('#showme .grid');
+    parent.innerHTML = '';
+    var ratioW = parseInt(parent.parentElement.style.width) / size;
+    var ratioH = parseInt(parent.parentElement.style.height) / size;
+    for (var i = 0; i < ratioH; i++) {
+        for (var p = 0; p < ratioW; p++) {
+            var cell = document.createElement('div');
+            cell.style.height = (size - 1) + 'px';
+            cell.style.width = (size - 1) + 'px';
+            parent.appendChild(cell);
+        }
+    }
 }
