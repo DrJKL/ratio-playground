@@ -13,16 +13,17 @@ label {
     border: 1px solid green;
     color: aqua;
     margin: 0 auto;
-    position: relative;;
+    position: relative;
 }
 #showme.grid {
     display:block;
 }
-
 #inputs, #ratioinfo {
     display:inline-block;
 }
-
 #showme.grid.good {
     background-color: gold;
+}
+#commonfactors span {
+    cursor:pointer;
 }
